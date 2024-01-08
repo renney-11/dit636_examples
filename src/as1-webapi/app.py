@@ -151,6 +151,8 @@ def update_student(id):
         for existing in students:
             if existing["id"] == int(id):
                 found = True
+                if existing["personnummer"] != student["personnummer"]:
+                    return {"error": "Changes to personnummer are not allowed."}, 400
             elif student["personnummer"] == existing["personnummer"]:
                 return {"error": "Personnummer already belongs to student " + str(existing["id"])}, 400
 
