@@ -258,4 +258,39 @@ public class Recipes {
     public void testHashCode_SameRecipes() {
         assertEquals(r1.hashCode(), r1.hashCode());
     }
+
+    @Test
+    public void testSetPrice_EmptyString() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setPrice("");
+        });
+    }
+
+    @Test
+    public void testSetAmtChocolate_EmptyString() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setAmtChocolate("");
+        });
+    }
+
+    @Test
+    public void testSetAmtMilk_EmptyString() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setAmtMilk("");
+        });
+    }
+
+    @Test
+    public void testSetAmtCoffee_EmptyString() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setAmtCoffee("");
+        });
+    }
+
+    @Test
+    public void testSetAmtSugar_EmptyString() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setAmtSugar("");
+        });
+    }
 }
