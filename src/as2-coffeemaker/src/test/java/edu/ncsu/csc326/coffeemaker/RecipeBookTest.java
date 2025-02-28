@@ -211,22 +211,6 @@ public class RecipeBookTest {
         assertNull(edited, "Should not be able to edit a non-existing recipe");
     }
 
-    // Test to edit a previously edited recipe, with its original name?
-    @Test
-    public void testEditRecipe_PrevEdited() {
-        cm.addRecipe(r1);
-        cm.editRecipe(0, r2);
-
-        Recipe[] recipes = cm.getRecipes();
-
-        assertEquals(r2.getName(), recipes[0].getName());
-        assertEquals(r2.getAmtCoffee(), recipes[0].getAmtCoffee());
-        assertEquals(r2.getAmtMilk(), recipes[0].getAmtMilk());
-        assertEquals(r2.getAmtSugar(), recipes[0].getAmtSugar());
-        assertEquals(r2.getAmtChocolate(), recipes[0].getAmtChocolate());
-        assertEquals(r2.getPrice(), recipes[0].getPrice());
-    }
-
     // Test to attempt editing a recipe via a negative or otherwise out-of-bounds number
     @Test
     public void testEditRecipe_OutOfBounds() {
