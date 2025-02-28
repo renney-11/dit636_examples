@@ -120,6 +120,14 @@ public class RecipeBookTest {
         assertFalse(cm.addRecipe(r2));
     }
 
+    // Test to add a recipe with null value
+    @Test
+    public void testAddRecipe_Null() {
+        assertThrows(Exception.class,()-> {
+            cm.addRecipe(null);
+        });
+    }
+
     // Test to add the maximum number of recipes
     @Test
     public void testAddRecipe_Max() {
@@ -167,11 +175,12 @@ public class RecipeBookTest {
     // Test to attempt deleting a recipe via a negative or otherwise out-of-bounds number
     @Test
     public void testDeleteRecipe_OutOfBounds() {
-        assertNull(cm.deleteRecipe(-1), "Should return null for trying to delete a non-existing recipe");
-        assertNull(cm.deleteRecipe(100), "Should return null for trying to delete a non-existing recipe");
-
+        assertThrows(Exception.class,()-> {
+            cm.deleteRecipe(-1);
+        });
     }
 
+    // Test to edit an existing recipe
     @Test
     public void testEditRecipe_Normal() {
         cm.addRecipe(r1);
@@ -187,6 +196,7 @@ public class RecipeBookTest {
         assertEquals(r2.getPrice(), recipes[0].getPrice());
     }
 
+    // Test to edit a non-existing recipe
     @Test
     public void testEditRecipe_NonExisting() throws RecipeException {
         Recipe newRecipe = new Recipe();
@@ -220,7 +230,8 @@ public class RecipeBookTest {
     // Test to attempt editing a recipe via a negative or otherwise out-of-bounds number
     @Test
     public void testEditRecipe_OutOfBounds() {
-        assertNull(cm.editRecipe(-1, r1), "Should return null for trying to edit a non-existing recipe");
-        assertNull(cm.editRecipe(5, r1), "Should return null for trying to edit a non-existing recipe");
+        assertThrows(Exception.class, () -> {
+            cm.editRecipe(-1, r1);
+        });
     }
 }
