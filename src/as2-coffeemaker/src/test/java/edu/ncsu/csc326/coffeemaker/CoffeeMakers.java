@@ -4,6 +4,7 @@ import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -112,5 +113,48 @@ public class CoffeeMakers {
 	@Test
 	public void testGetInventory_Normal() {
 		assertEquals("Coffee: 15\nMilk: 15\nSugar: 15\nChocolate: 15\n", cm.checkInventory());
+	}
+
+	@Test
+	public void testMakeCoffee_Normal() throws InventoryException {
+		cm.addRecipe(r1);
+		cm.addInventory("2", "7", "0", "0");
+		assertEquals(20, cm.makeCoffee(0, 70));
+	}
+
+	@Test
+	public void testMakeCoffee_InvalidPayment() {
+		int change = cm.makeCoffee(0, 20);
+		assertEquals(20, change);
+	}
+
+	@Test
+	public void testMakeCoffee_InvalidInventory() throws RecipeException {
+		Recipe newRecipe = new Recipe();
+		newRecipe.setName("TOO long Recipe");
+		newRecipe.setAmtCoffee("500");
+		newRecipe.setAmtMilk("500");
+		newRecipe.setAmtSugar("500");
+		newRecipe.setAmtChocolate("500");
+		newRecipe.setPrice("60");
+
+		cm.addRecipe(newRecipe);
+
+		int change = cm.makeCoffee(0, 100);
+
+		assertEquals(100, change);
+	}
+
+	@Test
+	public void testAddInventory_Negative() throws InventoryException {
+		cm.addInventory("-4", "7", "2", "0");
+	}
+
+	@Test
+	public void testGetRecipes_Normal() {
+		cm.addRecipe(r1);
+		Recipe[] recipes = cm.getRecipes();
+		assertEquals(4, recipes.length);
+		assertEquals("Coffee", recipes[0].getName());
 	}
 }
