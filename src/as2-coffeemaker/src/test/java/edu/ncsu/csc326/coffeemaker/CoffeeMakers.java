@@ -157,4 +157,11 @@ public class CoffeeMakers {
 		assertEquals(4, recipes.length);
 		assertEquals("Coffee", recipes[0].getName());
 	}
+
+	@Test
+	public void testMakeCoffee_NullRecipe() throws InventoryException {
+		cm.addInventory("4", "7", "2", "0");
+		int change = cm.makeCoffee(3, 100);
+		assertEquals(100, change);
+	}
 }
