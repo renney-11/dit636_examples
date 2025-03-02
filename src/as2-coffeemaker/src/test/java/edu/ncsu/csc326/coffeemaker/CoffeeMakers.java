@@ -129,6 +129,28 @@ public class CoffeeMakers {
 	}
 
 	@Test
+	public void testMakeCoffee_NotEnoughMoney() throws RecipeException {
+		CoffeeMaker coffeeMaker = new CoffeeMaker();
+		int recipeIndex = 0; // Assume valid recipe index
+		int amtPaid = 10; // Less than the recipe price
+
+		// Use setters instead of an invalid constructor
+		Recipe latte = new Recipe();
+		latte.setName("Latte");
+		latte.setAmtChocolate("1");
+		latte.setAmtCoffee("1");
+		latte.setAmtMilk("1");
+		latte.setAmtSugar("1");
+		latte.setPrice("20"); // Set the price as 20
+		coffeeMaker.getRecipes()[recipeIndex] = latte;
+
+		int change = coffeeMaker.makeCoffee(recipeIndex, amtPaid);
+
+		assertEquals(amtPaid, change); // Since the price > amtPaid, should return all money
+	}
+
+
+	@Test
 	public void testMakeCoffee_InvalidInventory() throws RecipeException {
 		Recipe newRecipe = new Recipe();
 		newRecipe.setName("TOO long Recipe");
