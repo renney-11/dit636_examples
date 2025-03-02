@@ -265,6 +265,19 @@ public class Recipes {
             defaultRecipe.setPrice("");
         });
     }
+    @Test
+    public void testPutPrice_NonNumeric() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setPrice("non numeric input");
+        });
+    }
+
+    @Test
+    void testSetPrice_Null() {
+        assertThrows(RecipeException.class, () -> {
+            defaultRecipe.setPrice(null);
+        });
+    }
 
     @Test
     public void testSetAmtChocolate_EmptyString() {
